@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Racing+Sans+One&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Roboto&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family-second); 
+    font-weight: 400;
+    text-decoration: none;
+    scroll-behavior: smooth;
+    color: var(--text-color-main);
+}
+
+h2, h2 span{
+    font-family: var(--font-family-main);
+    font-weight: 400;
+}
+
+:root{
+    --font-family-main: 'Roboto', sans-serif;
+    --font-family-second: 'Inter', sans-serif;
+    --text-color-main:#000000;
+    --text-color-second: #8953EB;
+    --text-color-third: #ffffff;
+    --text-color-fourth: #7027F4;
+    --background-color-second: #8953EB24;
+    --main-padding: 1rem;
+    
+
+    --header-height: 50px;
+    --headline-padding: 30px 20px;
+    --headline-font-size: 4rem;
+    --headline-font-size-small: 1.3rem;
+}
+
+main{
+    position: relative;
+    width: 100%;
+    text-decoration: none;
+    max-width: 1040px;
+    margin: 0 auto;
+    /* overflow-x: hidden; */  
+}
+
+header{
+    position: absolute;
+    display: flex;
+    width: 100%;
+}
+
+.header-inner{
+    position: relative;
+    width: 100%;
+    display: flex;
+    height: var(--header-height);
+}
+
+nav{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    align-items: center;
+    display: flex;
+    width: 60%;
+    max-width: 500px;
+}
+
+.nav-main-list{
+    width: 100%;
+
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.nav-link a{
+    display: flex;
+    height: var(--header-height);
+    align-items: center;
+    padding: 0 15px;
+    font-size: var(--headline-font-size-small);
+}
+
+.headline{
+    position: relative;
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: var(--headline-padding) ;
+    align-items: center;
+}
+
+.headline h2{
+    font-size: var(--headline-font-size);
+    display: inline-block;
+}
+
+.headline h2 span{
+    color: var(--text-color-second);
+}
+.headline h5{
+    font-size: var(--headline-font-size-small);
+    max-width: 80%;
+    text-align: center;
+}
+
+.scanner{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--main-padding);
+    padding: var(--main-padding);
+}
+
+.scanner > div{
+    background-color: var(--background-color-second);
+    padding: var(--main-padding);
+    border-radius: var(--main-padding);
+}
+
+.info-enter-block-form{
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    justify-content: flex-start;
+    padding: 1rem;
+}
+
+.info-enter-block-form input[type="text"],
+.info-enter-block-form textarea,
+.info-enter-block-form select{
+    width: 100%;
+    padding: calc(var(--main-padding)/2);
+    border-radius: calc(var(--main-padding)/2);
+    border: none;
+}
+
+.info-enter-block-form label{
+    padding: 0 0 0.2rem 0.4rem;
+    font-size: 0.9rem;
+}
+.info-enter-block-form label:not(:first-child){
+    margin: 0.8rem 0 0 0;
+}
+
+.info-enter-block-form textarea{
+    width: 100%;
+    resize: none;
+}
+
+.scanner-submit-area{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5rem 0 0 0;
+}
+
+.scanner-submit-area button[type="submit"]{
+    border: none;
+    padding: calc(var(--main-padding)/2.3) calc(var(--main-padding)*2.2);
+    background-color: var(--text-color-second);
+    color: var(--text-color-third);
+    border-radius: calc(var(--main-padding)/1.4);
+}
+
+
+/* Common Ports Block */
+.common-ports-block h3{
+    text-align: center;
+    padding: 0 0 1rem 0;
+}
+.common-ports-block ul{
+    list-style: none;
+    column-count: 2;
+}
+
+.common-ports-block li{
+    cursor: pointer;
+    margin: 0.2rem;
+}
+.common-ports-block li span{
+    color: var(--text-color-fourth);
+    padding: 0 0.5rem;
+}

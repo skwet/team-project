@@ -3,6 +3,9 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("<h1>NetGuardians</h1>")
+    return render(request, 'web/index.html')
+
+def home(response):
+    return render(response, 'web/home.html')
 
 

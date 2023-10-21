@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/NetworkGuardian.svg' %}">
+    <title>IMBA TEAM</title>
+</head>
+<body>
+    <main>
+        <header>
+            <div class="header-inner">
+                <a href="index.html">
+                    <div class="logo-box">
+                         <h2 class="imba-team">NETWORK GUARDIAN⚡</h2>
+                    </div>
+                </a>
+
+                <nav class="nav">
+                    <ul class="nav-main-list">
+                        <li class="nav-link"><a href="#">Scan</a></li>
+                        <li class="nav-link"><a href="#">Instructions</a></li>
+                        <li class="nav-link header-button"><a href="#">Why we?</a></li>
+                    </ul>
+                </nav>
+                <div class="burger">
+                    <div class="burger-first"></div>
+                    <div class="burger-second"></div>
+                    <div class="burger-third"></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="headline">
+            <h2>Check ports online <span>for FREE</span></h2>
+            <h5>Lorem ipsum dolor sit amet consectetur. Nibh in tincidunt nunc ipsum feugiat condimentum. </h5>
+        </div>
+    </main>
+    <script src="{% static 'script/script.js' %}"></script>
+</body>
+</html>
