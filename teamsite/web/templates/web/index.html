@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'style/style.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'img/NetworkGuardian.svg' %}">
-    <title>IMBA TEAM</title>
+    <title>NETWORK GUARDIAN</title>
 </head>
 <body>
     <main>
@@ -39,11 +39,13 @@
             <h5>Lorem ipsum dolor sit amet consectetur. Nibh in tincidunt nunc ipsum feugiat condimentum. </h5>
         </div>
 
+        {% block content %}
         <div class="scanner">
             <div class="info-enter-block">
-                <form action="data.json" method="post" class="info-enter-block-form">
-                    <label for="domain-ip">Domain/IP</label>
-                    <input type="text" name="domain-ip" id="domain-ip" placeholder="172.212.111.84">
+                <form action="{% url 'port_scan' %}" method="post" class="info-enter-block-form">
+                    {% csrf_token %}
+                    <label for="ip">Domain/IP</label>
+                    <input type="text" name="ip" id="ip" placeholder="172.212.111.84">
                     <label for="scanner-dropdown">Port type:</label>
                     <select id="scanner-dropdown">
                         <option value="CustomPorts">Custom ports</option>
@@ -52,17 +54,17 @@
                         <option value="ApplicationPorts">Application ports:</option>
                         <option value="P2PPorts">P2P ports:</option>
                     </select>
-                    <label for="entered-ports">Ports:</label>
-                    <textarea id="entered-ports" name="entered-ports" placeholder="21, 22, 23, 25" rows="6"></textarea>
+                    <label for="ports">Ports:</label>
+                    <textarea id="ports" name="ports" placeholder="21, 22, 23, 25" rows="6"></textarea>
                     <div class="scanner-submit-area">
                         <button type="submit" class="submit-button">Check</button>
                         <div class="input-box">
-                            <input type="checkbox" name="detect-os" id="detect-os">
-                            <label for="detect-os">Detect OS</label>
+                            <input type="checkbox" name="os" id="os">
+                            <label for="os">Detect OS</label>
                         </div>
                         <div class="input-box">
-                            <input type="checkbox" name="detect-sv" id="detect-sv">
-                            <label for="detect-sv">Detect SV</label>
+                            <input type="checkbox" name="sv" id="sv">
+                            <label for="sv">Detect SV</label>
                         </div> 
                     </div>
                     
@@ -102,6 +104,7 @@
                 </ul>          
             </div>
         </div>
+        {% endblock %}
         
 
         

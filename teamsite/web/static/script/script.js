@@ -1,8 +1,8 @@
 const scannerDropDown = document.querySelector('#scanner-dropdown');
-const scannerTextArea = document.querySelector('#entered-ports');
+const scannerTextArea = document.querySelector('#ports');
 const commonPortsList = document.querySelector('.common-ports-list');
 const scannerForm = document.querySelector('.info-enter-block-form');
-const scannerIp = scannerForm.querySelector('#domain-ip');
+const scannerIp = scannerForm.querySelector('#ip');
 
 const portsData ={
     CustomPorts: "",
@@ -15,16 +15,16 @@ const portsData ={
 let userData = {};
 
 scannerForm.addEventListener('submit', (e) =>{
-    e.preventDefault();
+    // e.preventDefault();
 
     const getInfo = (input, name) =>{
         const element = input.querySelector(`[name="${name}"]`);
         return element.type === "checkbox" ? element.checked : element.value;
     }
-    userData.domainIp = getInfo(scannerForm, "domain-ip");
-    userData.ports = getInfo(scannerForm, "entered-ports")
-    userData.detectOs = getInfo(scannerForm, "detect-os");
-    userData.detectSV = getInfo(scannerForm, "detect-sv");
+    userData.Ip = getInfo(scannerForm, "ip");
+    userData.ports = parseInt(getInfo(scannerForm, "ports"));
+    userData.Os = getInfo(scannerForm, "os");
+    userData.SV = getInfo(scannerForm, "sv");
     console.log(userData); //об'єкт userdata містить всю інфу від юзера
 })
 
