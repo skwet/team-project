@@ -1,10 +1,8 @@
 import socket
 from decouple import config
-# import openai
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 
-API = config('AI_KEY')
 
 def port_scan(request):
     if request.method == 'POST':
@@ -16,7 +14,7 @@ def port_scan(request):
             ports_list = [int(port.strip()) for port in ports.split(',')]
             for port in ports_list:
                 sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-                sock.settimeout(1.0)
+                sock.settimeout(0.1)
                 res = sock.connect_ex((ip,port))
                 if res == 0:
                     if sv == 'on':
