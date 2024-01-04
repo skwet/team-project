@@ -1,0 +1,3 @@
+80 is open with service http!
+443 is open with service https!
+53 is open with service domain!

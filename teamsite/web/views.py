@@ -16,7 +16,7 @@ def port_scan(request):
             ports_list = [int(port.strip()) for port in ports.split(',')]
             for port in ports_list:
                 sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-                sock.settimeout(0.01)
+                sock.settimeout(1.0)
                 res = sock.connect_ex((ip,port))
                 if res == 0:
                     if sv == 'on':
@@ -26,10 +26,15 @@ def port_scan(request):
                     else:
                         open_ports.append(f'{port} is open!')
                         sock.close()
-                if open_ports:
+                
+                with open('results.txt', 'w') as file:
+                    for res in open_ports:
+                        file.write(res + '\n')
+
+            if open_ports:
                     return render(request, 'web/results.html', {'open_ports': open_ports})
-                else:
-                    return HttpResponse('None of input ports were found!')  
+            else:
+                return HttpResponse('None of input ports were found!')  
         except socket.error:
                 return HttpResponse('Error! Try again later...')
                 
