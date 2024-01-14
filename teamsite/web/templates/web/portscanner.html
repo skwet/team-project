@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'style/style.css' %}">
-    <link rel="icon" type="image/x-icon" href="{% static './img/NetworkGuardian.svg' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/NetworkGuardian.svg' %}">
     <title>Net-Guardian</title>
 </head>
 <body>
@@ -15,7 +15,7 @@
             <div class="header-inner">
                 <a href="index.html">
                     <div class="logo-box">
-                        <img src="{% static './img/NetworkGuardian.svg' %}" alt="Network-Guardian Logo">
+                        <img src="img/NetworkGuardian.svg" alt="Network-Guardian Logo">
                     </div>
                 </a>
 
@@ -41,7 +41,7 @@
 
         <div class="scanner">
             <div class="info-enter-block">
-                <form action="{% url 'port' %}" method="post" class="info-enter-block-form">
+                <form action="data.json" method="post" class="info-enter-block-form">
                     <label for="domain-ip">Domain/IP</label>
                     <input type="text" name="domain-ip" id="domain-ip" placeholder="172.212.111.84">
                     <label for="scanner-dropdown">Port type:</label>
@@ -102,17 +102,23 @@
                 </ul>          
             </div>
         </div>
+
+        
+       
         <div class="scanner-results scanner-results-active">
             <div class="scanner-results-text">
                 <h3>Results<h3> 
                 <ul class="scanner-results-header">
                     <li>
                         <p>Domain/IP</p>
-                        <p>172.212.111.84</p>
+                        <p>{{ host }}</p>
                     </li>
                     <li>
                         <p>Ports scanned:</p>
-                        <p>3</p>
+                        {% if ports_list %}
+                        <p>{{ ports_list|length }}</p>
+                        {% else %}
+                        <p>0</p>
                     </li>
                     <li>
                         <p>Open ports:</p>
@@ -149,7 +155,26 @@
                     </tr>
                 </table>
             </div>
-
+        </div>
+        <h2 class="instruction-header">Instruction</h2>
+        <div class="instruction">
+            
+            <div class="instruction-text">
+                <span>Enter Domain/IP</span>  
+                <p>Specify the domain name or IP Address in the search bar whose ports you must check.</p> 
+                <span>Select Port Type:</span>
+                <p>The default option is “Custom Ports” it means that you will have to manually put in numbers of the ports you want to be checked or you can just select one of the groups regarding your intrest</p>
+                <span>Start Port Scanning</span>
+                <p>Click on “Check” to start the process of scanning . It will quickly test each port and display the results.
+                It will display “Open” next to each port that receives traffic. If it shows “Timedout,” it will indicate that the respective port is unavailable or blocked.</p>
+            </p>
+            </div>
+            <div class="instruction-image">
+                <img src="img/workcloudimg.svg" alt="Workcloud">
+            </div>
+            
+        </div>
+    <!--
             <div class="scanner-results-loader fulfilling-bouncing-circle-spinner">
                 <div class="circle"></div>
                 <div class="orbit"></div>
@@ -158,34 +183,8 @@
         <div class="headline">
             <h2>You can also scan your <span>network security!</span></h2>
         </div>
-        <div class="vulnerability-scanner">
-            
-            <form action="{% url 'vuln' %}" method="post" class="info-enter-block-form">
-                <label for="domain-ip">Domain/IP</label>
-                <input type="text" name="domain-ip" id="domain-ip" placeholder="172.212.111.84">
-                <button type="submit" class="submit-button check-button">Check</button>
-            </form>
-        </div>
 
-        <div class="vulnerability-results scan-results-output">
-            <button type="submit" class="scan-results-output-bt">Copy Report</button>
-        </div>
-        
-        
-        
-
-    <!-- <footer id="footer">
-        <div class="footer-inner">
-            <h2 class="imba-team">NETWORK GUARDIAN⚡</h2>
-            <ul class="footer-nav">
-                <li><a href="#">Scan</a></li>
-                <li><a href="#">Instructions</a></li>
-                <li><a href="#">Why we?</a></li>
-            </ul>
-        </div>
-    </footer> -->
-
-    
+    -->
     </main>
     <div class="background">
         <div class="bg-element"></div>
@@ -194,6 +193,6 @@
 
     </div>
     
-    <script src="{% static 'script/script.js' %}"></script>
+    <script src="script/portscanner.js"></script>
 </body>
 </html>
