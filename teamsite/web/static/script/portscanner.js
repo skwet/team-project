@@ -66,7 +66,6 @@ commonPortsList.addEventListener('click', commonPortsAdd);
 const scannerResultsTable = document.querySelector(".scanner-results table");
 const scannerResultsTableElements = document.querySelectorAll(".scanner-results-text table td");
 const scannerResultsLoad = () => {
-    console.log("Heeeeeeeeeeee haw");
     scannerResultsTableElements.forEach(element => {
         const content = element.textContent.toLowerCase();
         element.style.color = content == "open" ? "var(--port-open-color)" : content == "closed" ? "var(--port-closed-color)" : "";
@@ -83,6 +82,38 @@ scannerResultsTable.addEventListener('change', scannerResultsLoad);
 
 
 
+// Ask-ai button
 
+function postData(event) {
+    var parentTd = event.target.closest('td').querySelector('.port-number');
+    if (parentTd) {
+        var textContent = parentTd.textContent.trim();
+        console.log("Text Content:", textContent);
 
+        // Now you can use the textContent variable to send data to the server
+        // For example, using the fetch API:
 
+        var url = "your_server_endpoint";
+        var data = {
+            textContent: textContent
+        };
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // Handle the response here
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    } else {
+        console.log("Parent td not found");
+    }
+}

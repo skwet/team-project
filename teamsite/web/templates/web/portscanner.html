@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+    <link rel="stylesheet" href="{% static 'style/style3.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'img/NetworkGuardian.svg' %}">
     <title>Net-Guardian</title>
 </head>
@@ -13,17 +13,17 @@
     <main>
         <header>
             <div class="header-inner">
-                <a href="index.html">
+                <a href="{% url 'port' %}">
                     <div class="logo-box">
-                        <img src="img/NetworkGuardian.svg" alt="Network-Guardian Logo">
+                        <img src="{% static './img/NetworkGuardian.svg' %}" alt="Network-Guardian Logo">
                     </div>
                 </a>
 
                 <nav class="nav">
                     <ul class="nav-main-list">
-                        <li class="nav-link"><a href="portscanner.html">Port Scanner</a></li>
-                        <li class="nav-link"><a href="vulnerability.html">Vulnerability scanner</a></li>
-                        <li class="nav-link header-button"><a href="#">Why we?</a></li>
+                        <li class="nav-link"><a href="{% url 'port' %}">Port Scanner</a></li>
+                        <li class="nav-link"><a href="{% url 'vuln' %}">Vulnerability scanner</a></li>
+                        <li class="nav-link header-button"><a href="#why-we">Why we?</a></li>
                     </ul>
                 </nav>
                 <div class="burger">
@@ -36,12 +36,13 @@
 
         <div class="headline">
             <h2>Check ports online <span>for FREE</span></h2>
-            <h5>Lorem ipsum dolor sit amet consectetur. Nibh in tincidunt nunc ipsum feugiat condimentum. </h5>
+            <h5>Empowering Security, One Port at a Time: Explore, Assess, and Strengthen with Precision!</h5>
         </div>
 
         <div class="scanner">
             <div class="info-enter-block">
-                <form action="data.json" method="post" class="info-enter-block-form">
+                <form action="{% url 'port' %}" method="post" class="info-enter-block-form">
+                    {% csrf_token %}
                     <label for="domain-ip">Domain/IP</label>
                     <input type="text" name="domain-ip" id="domain-ip" placeholder="172.212.111.84">
                     <label for="scanner-dropdown">Port type:</label>
@@ -111,7 +112,11 @@
                 <ul class="scanner-results-header">
                     <li>
                         <p>Domain/IP</p>
+                        {% if host %}
                         <p>{{ host }}</p>
+                        {% else %}
+                        <p>-</p>
+                        {% endif %}
                     </li>
                     <li>
                         <p>Ports scanned:</p>
@@ -119,10 +124,15 @@
                         <p>{{ ports_list|length }}</p>
                         {% else %}
                         <p>0</p>
+                        {% endif %}
                     </li>
                     <li>
                         <p>Open ports:</p>
-                        <p>2</p>
+                        {% if ports_list %}
+                        <p>{{ open_ports|length }}</p>
+                        {% else %}
+                        <p>0</p>
+                        {% endif %}
                     </li>
                 </ul>
                 <table>
@@ -135,24 +145,26 @@
                         <th>Detect SV</th>
                         <th>Service Name</th>
                     </tr>
+                    {% for port in open_ports %}
                     <tr>
-                        <td>80</td>
-                        <td>OPEN</td>
-                        <td>Active</td>
-                        <td>HTTP</td>
+                        <td>
+                            <div onclick="postData(event)" class="ask-ai">Ask AI</div>
+                            <div class="port-number">{{ port.port }}</div>
+                        </td>
+                        <td>{{ port.state }}</td>
+                        <td>{{ port.detect }}</td>
+                        <td>{{ port.service }}</td>
                     </tr>
+                    {% endfor %}
+
+                    {% for port in closed_ports %}
                     <tr>
-                        <td>123</td>
-                        <td>closed</td>
-                        <td>Active</td>
-                        <td>HTTP</td>
+                        <td>{{ port.port }}</td>
+                        <td>{{ port.state }}</td>
+                        <td>{{ port.detect }}</td>
+                        <td>{{ port.service }}</td>
                     </tr>
-                    <tr>
-                        <td>80</td>
-                        <td>OPEN</td>
-                        <td>Active</td>
-                        <td>HTTP</td>
-                    </tr>
+                    {% endfor %}    
                 </table>
             </div>
         </div>
@@ -166,13 +178,25 @@
                 <p>The default option is “Custom Ports” it means that you will have to manually put in numbers of the ports you want to be checked or you can just select one of the groups regarding your intrest</p>
                 <span>Start Port Scanning</span>
                 <p>Click on “Check” to start the process of scanning . It will quickly test each port and display the results.
-                It will display “Open” next to each port that receives traffic. If it shows “Timedout,” it will indicate that the respective port is unavailable or blocked.</p>
+                It will display “Open” next to each port that receives traffic. If it shows “Closed”, it will indicate that the respective port is unavailable or blocked.</p>
             </p>
             </div>
             <div class="instruction-image">
-                <img src="img/workcloudimg.svg" alt="Workcloud">
+                <img src="{% static 'img/workcloudimg.svg' %}" alt="Workcloud">
             </div>
-            
+        </div>
+        <h2 class="why-we-header" id="why-we">Why we?</h2>
+        <div class="why-we">
+            <div class="why-we-image">
+                <img src="{% static 'img/why-we.png' %}" alt="Man working with notebook">
+            </div>
+            <div class="why-we-text">
+                <p>Our open port scanner provides an easy and fast way to run an online scan with zero setup and maintenance.  
+                    Each port scan provides you will a professinal report you can share with colleagues, managers and clients. We also keep our port scan tool up to date through constant updates regarding performance and functionality 
+                    Information at a glance 
+                    The portscan report turns the raw output of our scanner into preformatted tables which anyone can quickly go through.
+                </p>
+            </div>
         </div>
     <!--
             <div class="scanner-results-loader fulfilling-bouncing-circle-spinner">
@@ -193,6 +217,6 @@
 
     </div>
     
-    <script src="script/portscanner.js"></script>
+    <script src="{% static 'script/portscanner.js' %}"></script>
 </body>
 </html>
